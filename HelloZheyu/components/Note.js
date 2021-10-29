@@ -13,7 +13,7 @@ export default function Note(){
 const styles = StyleSheet.create ({
   style:{
     color:'black',
-    border:"solid black",
+    borderColor:"black",
     padding:"4px",
   },
 });

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import {View, StyleSheet, Text, TextInput, Button, ImageBackground} from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Note from './Note'
 
 
-const CA1 = (props) => {
+const CA = (props) => {
   const [amount, setAmount] = useState("0");
   const [num, setNum] = useState(0);
   const [temp, setTemp] = useState(0);
@@ -14,6 +15,13 @@ const CA1 = (props) => {
   const [debugging,setDebugging] = useState(false)
   const image = { uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxfrKsMWhx68D3bg5cVJTdgjUD63dAC73_bA&usqp=CAU" };
 
+  useEffect(() => {getData()}
+             ,[])
+
+  useEffect(() => {
+    storeData({num})
+  },[num])
+
 let debugView = ""
   if (debugging) {
     debugView =
@@ -22,6 +30,8 @@ let debugView = ""
           <Text> amount: {amount} </Text>
           <Text> temp: {temp} </Text>
           <Text> result: {result} </Text>
+          <Button title="clear memory"
+              onPress={()=> clearAll()}/>
       </View>
   }
 
@@ -43,8 +53,9 @@ let showView = ""
       <Button
           color='red'
           title='Next Step'
-          onPress = {() =>setShowPeople(false)&
-                          setShowAmount(true)}
+          onPress = {() =>{setShowPeople(false)
+                          setShowAmount(true)
+                    }}
       />
       </View>
       </View>
@@ -75,10 +86,11 @@ let showView1 = ""
       <Button
           color='red'
           title='Next Step'
-          onPress = {() =>setAmount(parseFloat(temp)+parseFloat(amount)) &
-                          setTemp(0)&
-                          setShowAmount(false)&
-                          setShowResult(true)}
+          onPress = {() =>{setAmount(parseFloat(temp)+parseFloat(amount))
+                          setTemp(0)
+                          setShowAmount(false)
+                          setShowResult(true)
+                    }}
       />
       </View>
       </View>
@@ -104,7 +116,37 @@ let showView1 = ""
       </View>
 
     }
-  return (
+const storeData = async (value) => {
+        try {
+            const jsonValue = JSON.stringify(value)
+            await AsyncStorage.setItem('@ca', jsonValue)
+          } catch (e) {
+            console.dir(e)
+          }
+}
+const getData = async () => {
+        try {
+            const jsonValue = await AsyncStorage.getItem('@ca')
+            let data = null
+            if (jsonValue!=null) {
+              data = JSON.parse(jsonValue)
+              setNum(data.num)
+            } else {
+              setNum(0)
+            }
+          } catch(e) {
+            console.dir(e)
+          }
+}
+const clearAll = async () => {
+          try {
+              await AsyncStorage.clear()
+          } catch(e) {
+              console.dir(e)
+          }
+}
+
+return (
   <View style={styles.container}>
     <ImageBackground source={image} resizeMode="fill" style={styles.image}>
       <View style={{alignItems:'center',justifyContent:'center'}}>
@@ -129,7 +171,7 @@ let showView1 = ""
   }
   const styles = StyleSheet.create ({
     container: {
-      border: "thick solid black",
+      borderColor: "black",
       flexDirection:'column',
       margin:"20px",
       padding:"35px",
@@ -156,4 +198,4 @@ let showView1 = ""
     },
   });
 
-export default CA1;
+export default CA;

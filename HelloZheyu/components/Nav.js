@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { StyleSheet, Text, View, Button, } from 'react-native';
-import CA1 from './ca1'
+import CA from './ca'
 
 
 
@@ -21,7 +21,7 @@ const MyStack = () => {
           //options={{ title: 'Welcome' }}
         />
 
-        <Stack.Screen name="CA1" component={CA1} />
+        <Stack.Screen name="CA" component={CA} />
 
       </Stack.Navigator>
     </NavigationContainer>
@@ -40,7 +40,7 @@ const HomeScreen = ({ navigation }) => {
         <Button
          title="Bill Splitter!!"
          onPress={() =>
-           navigation.navigate('CA1')
+           navigation.navigate('CA')
          }
        />
 
