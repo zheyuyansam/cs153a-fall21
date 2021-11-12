@@ -34,88 +34,88 @@ let debugView = ""
               onPress={()=> clearAll()}/>
       </View>
   }
-
-let showView = ""
-  if (showPeople) {
-    showView =
-      <View>
-      <View style={{alignItems:'center',justifyContent:'center'}}>
-          <Text style={styles.header}>
-               Enter the Number of People:
-          </Text>
-      </View>
-      <TextInput
-          style={styles.input}
-          placeholder="Number of People"
-          onChangeText={text => {setNum(text)}}
-      />
-      <View style={{alignItems:'center',justifyContent:'center'}}>
-      <Button
-          color='red'
-          title='Next Step'
-          onPress = {() =>{setShowPeople(false)
-                          setShowAmount(true)
-                    }}
-      />
-      </View>
-      </View>
-
-  }
-let showView1 = ""
-  if (showAmount) {
-    showView =
-      <View>
-      <View style={{alignItems:'center',justifyContent:'center'}}>
-          <Text style={styles.header}>
-               Enter the Amount of Bill:
-          </Text>
-      </View>
-      <TextInput
-          style={styles.input}
-          placeholder="Amount of Bill ($)"
-          onChangeText={text => {setTemp(text)}}
-      />
-      <View style={{alignItems:'center',justifyContent:'center'}}>
-      <Button
-          color='green'
-          title='Add Another Bill'
-          onPress = {() =>setAmount(parseFloat(temp)+parseFloat(amount))}
-      />
-      </View>
-      <View style={{alignItems:'center',justifyContent:'center'}}>
-      <Button
-          color='red'
-          title='Next Step'
-          onPress = {() =>{setAmount(parseFloat(temp)+parseFloat(amount))
-                          setTemp(0)
-                          setShowAmount(false)
-                          setShowResult(true)
-                    }}
-      />
-      </View>
-      </View>
-
-  }
-
-  let showView2 = ""
-    if (showResult) {
+  let showView = ""
+    if (showPeople) {
       showView =
-      <View>
-        <Text>The number of people is:{num}</Text>
-        <Text>The total amount of bill is:{amount}</Text>
+        <View>
         <View style={{alignItems:'center',justifyContent:'center'}}>
-          <Button
+            <Text style={styles.header}>
+                 Enter the Number of People:
+            </Text>
+        </View>
+        <TextInput
+            style={styles.input}
+            placeholder="Number of People"
+            onChangeText={text => {setNum(text)}}
+        />
+        <View style={{alignItems:'center',justifyContent:'center'}}>
+        <Button
             color='red'
-            title='Calculate Result'
-            onPress = {() =>setResult(amount/parseFloat(num))}
-          />
+            title='Next Step'
+            onPress = {() =>{setShowPeople(false)
+                            setShowAmount(true)
+                      }}
+        />
         </View>
-        <View style={{alignItems:'center',justifyContent:'center'}}>
-            <Text> {result} dollar(s) per person</Text>
         </View>
-      </View>
 
     }
+  let showView1 = ""
+    if (showAmount) {
+      showView =
+        <View>
+        <View style={{alignItems:'center',justifyContent:'center'}}>
+            <Text style={styles.header}>
+                 Enter the Amount of Bill:
+            </Text>
+        </View>
+        <TextInput
+            style={styles.input}
+            placeholder="Amount of Bill ($)"
+            onChangeText={text => {setTemp(text)}}
+        />
+        <View style={{alignItems:'center',justifyContent:'center'}}>
+        <Button
+            color='green'
+            title='Add Another Bill'
+            onPress = {() =>setAmount(parseFloat(temp)+parseFloat(amount))}
+        />
+        </View>
+        <View style={{alignItems:'center',justifyContent:'center'}}>
+        <Button
+            color='red'
+            title='Next Step'
+            onPress = {() =>{setAmount(parseFloat(temp)+parseFloat(amount))
+                            setTemp(0)
+                            setShowAmount(false)
+                            setShowResult(true)
+                      }}
+        />
+        </View>
+        </View>
+
+    }
+
+    let showView2 = ""
+      if (showResult) {
+        showView =
+        <View>
+          <Text style={{color:"red"}}>The number of people is:{num}</Text>
+          <Text style={{color:"red"}}>The total amount of bill is:{amount}</Text>
+          <View style={{alignItems:'center',justifyContent:'center'}}>
+            <Button
+              color='red'
+              title='Calculate Result'
+              onPress = {() =>setResult(amount/parseFloat(num))}
+            />
+          </View>
+          <View style={{alignItems:'center',justifyContent:'center'}}>
+              <Text style={{color:"red"}}>{result} dollar(s) per person</Text>
+          </View>
+        </View>
+
+      }
+
 const storeData = async (value) => {
         try {
             const jsonValue = JSON.stringify(value)

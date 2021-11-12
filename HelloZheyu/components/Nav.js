@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { StyleSheet, Text, View, Button, } from 'react-native';
 import CA from './ca'
+import History from './history'
 
 
 
@@ -22,6 +23,7 @@ const MyStack = () => {
         />
 
         <Stack.Screen name="CA" component={CA} />
+        <Stack.Screen name="History" component={History} />
 
       </Stack.Navigator>
     </NavigationContainer>
@@ -43,6 +45,13 @@ const HomeScreen = ({ navigation }) => {
            navigation.navigate('CA')
          }
        />
+
+       <Button
+        title="Record bill amount!!"
+        onPress={() =>
+          navigation.navigate('History')
+        }
+      />
 
     </View>
   );
