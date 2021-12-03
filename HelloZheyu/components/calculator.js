@@ -1,10 +1,9 @@
 import React, { useState,useEffect } from "react";
-import {View, StyleSheet, Text, TextInput, Button, ImageBackground} from "react-native";
+import {View, StyleSheet, Text, TextInput, Button} from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Note from './Note'
 
-
-const CA = (props) => {
+const Calculator= (props) => {
   const [amount, setAmount] = useState("0");
   const [num, setNum] = useState(0);
   const [temp, setTemp] = useState(0);
@@ -13,7 +12,6 @@ const CA = (props) => {
   const [showAmount,setShowAmount] =useState(false)
   const [showResult,setShowResult] =useState(false)
   const [debugging,setDebugging] = useState(false)
-  const image = { uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxfrKsMWhx68D3bg5cVJTdgjUD63dAC73_bA&usqp=CAU" };
 
   useEffect(() => {getData()}
              ,[])
@@ -30,8 +28,6 @@ let debugView = ""
           <Text> amount: {amount} </Text>
           <Text> temp: {temp} </Text>
           <Text> result: {result} </Text>
-          <Button title="clear memory"
-              onPress={()=> clearAll()}/>
       </View>
   }
   let showView = ""
@@ -119,14 +115,14 @@ let debugView = ""
 const storeData = async (value) => {
         try {
             const jsonValue = JSON.stringify(value)
-            await AsyncStorage.setItem('@ca', jsonValue)
+            await AsyncStorage.setItem('@calculator', jsonValue)
           } catch (e) {
             console.dir(e)
           }
 }
 const getData = async () => {
         try {
-            const jsonValue = await AsyncStorage.getItem('@ca')
+            const jsonValue = await AsyncStorage.getItem('@calculator')
             let data = null
             if (jsonValue!=null) {
               data = JSON.parse(jsonValue)
@@ -138,49 +134,41 @@ const getData = async () => {
             console.dir(e)
           }
 }
-const clearAll = async () => {
-          try {
-              await AsyncStorage.clear()
-          } catch(e) {
-              console.dir(e)
-          }
-}
+
 
 return (
   <View style={styles.container}>
-    <ImageBackground source={image} resizeMode="fill" style={styles.image}>
       <View style={{alignItems:'center',justifyContent:'center'}}>
           <Text style={{fontSize:36}}>Bill Splitting </Text>
           <Text style={{fontSize:36}}>Calculator</Text>
       </View>
-      {showView}
-      {showView1}
-      {showView2}
-      <View style={{alignItems:'center',justifyContent:'center',margin:'10px'}}>
-      <Button
-        title={(debugging?'hide':'show')+" debug info" }
-        color="green"
-        onPress = {() => setDebugging(!debugging)}
+      <Text>
+        {showView}
+        {showView1}
+        {showView2}
+      </Text>
+      <View style={{alignItems:'center',justifyContent:'center',margin:'5%'}}>
+        <Button
+          title={(debugging?'hide':'show')+" debug info" }
+          color="green"
+          onPress = {() => setDebugging(!debugging)}
         />
       </View>
+      <Text>
         {debugView}
-      <Note/>
-    </ImageBackground>
+      </Text>
+     <Note>
+     </Note>
   </View>
    );
   }
   const styles = StyleSheet.create ({
     container: {
+      backgroundColor:'lightgreen',
       borderColor: "black",
       flexDirection:'column',
-      margin:"20px",
-      padding:"35px",
       alignItems: 'center',
       justifyContent: 'center',
-    },
-    image: {
-      flex: 1,
-      justifyContent: "center"
     },
     header: {
       margin:20,
@@ -198,4 +186,4 @@ return (
     },
   });
 
-export default CA;
+export default Calculator;

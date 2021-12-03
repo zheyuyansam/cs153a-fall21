@@ -171,9 +171,9 @@ const History = () => {
       </View>
       <View style={{flexDirection:'row',
                     justifyContent:'center',
-                    backgroundColor:'white'}}>
+                    backgroundColor:'darkseagreen'}}>
         <Text style={{fontSize:20,
-                      color:'black',backgroundColor:'white'}}>
+                      color:'black',backgroundColor:'darkseagreen'}}>
               History
          </Text>
       </View>
@@ -208,7 +208,6 @@ const styles = StyleSheet.create({
     backgroundColor:'lightgreen',
     fontSize: 32,
     padding:10,
-    color: 'blue'
   },
 
 });

@@ -2,11 +2,10 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { StyleSheet, Text, View, Button, } from 'react-native';
-import CA from './ca'
+import { StyleSheet, Text, View, Button } from 'react-native';
+import Calculator from './calculator'
 import History from './history'
-
-
+import Feedback from './feedback'
 
 const Stack = createNativeStackNavigator();
 
@@ -17,13 +16,14 @@ const MyStack = () => {
       <Stack.Navigator>
 
         <Stack.Screen
-          name="Home"
+          name="Welcome to MyBill"
           component={HomeScreen}
           //options={{ title: 'Welcome' }}
         />
 
-        <Stack.Screen name="CA" component={CA} />
+        <Stack.Screen name="Calculator" component={Calculator} />
         <Stack.Screen name="History" component={History} />
+        <Stack.Screen name="Feedback" component={Feedback} />
 
       </Stack.Navigator>
     </NavigationContainer>
@@ -33,16 +33,15 @@ const MyStack = () => {
 
 const HomeScreen = ({ navigation }) => {
   return (
-      <View style={{ flexDirection: 'row',
-                     margin:"25px",
-                     border:"thick solid black",
-                     padding:'10px',
-                     justifyContent: 'space-around', }}>
-
+       <View style={{ flexDirection: 'column',
+                     margin:"5%",
+                     padding:'5%',
+                     justifyContent: 'space-around',
+                     backgroundColor:'lightgreen' }}>
         <Button
          title="Bill Splitter!!"
          onPress={() =>
-           navigation.navigate('CA')
+           navigation.navigate('Calculator')
          }
        />
 
@@ -52,6 +51,12 @@ const HomeScreen = ({ navigation }) => {
           navigation.navigate('History')
         }
       />
+      <Button
+       title="Enter your feedback!!"
+       onPress={() =>
+         navigation.navigate('Feedback')
+       }
+     />
 
     </View>
   );
