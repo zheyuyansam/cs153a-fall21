@@ -1,5 +1,3 @@
-The name of my app is called YourBill
+The name of my app is called MyBill
 
-The app contains a bill splitter and a bill recorder. The bill splitter calculates the amount you need to transfer to other people, and the bill recorder records the bill amount.
-
-I am using the AsyncStorage to store the data, and the native-stack packages to build the stack.
+The app is a bill splitting calculator. Users are required to enter the number of people to split the bills together with bill amounts, then the result will be calculated. The app can also record bill history. Bill information like date, amount, note, etc can be stored. Another feature of this app is allowing users to post feedback and also read other users’ feedback.
