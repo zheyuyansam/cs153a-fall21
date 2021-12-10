@@ -1,7 +1,7 @@
 import React, { useState, useEffect }  from 'react';
 import { View, Button,
          FlatList, StyleSheet,
-         Text, TextInput } from 'react-native';
+         Text, TextInput} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
@@ -102,13 +102,26 @@ const History = () => {
 
 
   return (
-
     <View style={styles.container}>
-      <Text style={styles.headerText}>Record Bill Amount</Text>
-      <Text style={{fontSize:12}}>
+    <Text style={styles.headerText}>Record Bill Amount</Text>
+
+      <View style={{flexDirection:'row',
+                    justifyContent:'center',
+                    backgroundColor:'darkseagreen'}}>
+        <Text style={{fontSize:20,
+                      color:'black',backgroundColor:'darkseagreen'}}>
+              History
+         </Text>
+      </View>
+      <FlatList
+        backgroundColorcolor="darkseagreen"
+        data={history.reverse()}
+        renderItem={renderHistory}
+        keyExtractor={item => item.date}
+      />
+      <Text style={{fontSize:18}}>
           Enter your current bill amount below
       </Text>
-
       <View style={{flexDirection:'row',
                     margin:20,
                     justifyContent:'space-around'}}>
@@ -139,51 +152,35 @@ const History = () => {
               value = {note}
             />
         </View>
-        <View style={{flexDirection:'row',
+        <View style={{flexDirection:'column',
                       justifyContent:'space-around'}}>
         <Button
-               title={"Record"}
-               color="blue"
-               onPress = {() => {
-                 const newHistory =
-                   history.concat(
-                     {'date':date,
-                      'amount':amount,
-                      'note':note,
-                      'completed':new Date()
-                   })
-                 setHistory(newHistory)
-                 storeData(newHistory)
-                 setDate("")
-                 setAmount("")
-                 setNote("")
-               }}
-               />
+          title={"Record"}
+          color="blue"
+          onPress = {() => {
+            const newHistory =
+              history.concat(
+                {'date':date,
+                'amount':amount,
+                'note':note,
+                'completed':new Date()
+              })
+            setHistory(newHistory)
+            storeData(newHistory)
+            setDate("")
+            setAmount("")
+            setNote("")
+          }}
+        />
         <Button
-                title={"Clear"}
-                color="red"
-                onPress = {() => {
-                  clearAll()
-                  setHistory([])
-                }}
-                />
-
+          title={"Clear"}
+          color="red"
+          onPress = {() => {
+            clearAll()
+            setHistory([])
+          }}
+        />
       </View>
-      <View style={{flexDirection:'row',
-                    justifyContent:'center',
-                    backgroundColor:'darkseagreen'}}>
-        <Text style={{fontSize:20,
-                      color:'black',backgroundColor:'darkseagreen'}}>
-              History
-         </Text>
-      </View>
-
-      <FlatList
-        data={history.reverse()}
-        renderItem={renderHistory}
-        keyExtractor={item => item.date}
-      />
-
     </View>
 
   );
@@ -209,8 +206,13 @@ const styles = StyleSheet.create({
     fontSize: 32,
     padding:10,
   },
+  horizontal: {
+    flex:0.5,
+    flexDirection:'row',
+    width: 200,
+    height: 50,
+  },
 
 });
-
 
 export default History;

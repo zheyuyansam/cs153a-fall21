@@ -107,12 +107,14 @@ const Feedback = () => {
         </Text>
         <TextInput placeholder="title" onChangeText={(text) => setTitle(text)} />
         <TextInput placeholder="description" onChangeText={(text) => setDescription(text)} />
+        <View style={{flexDirection:'column',
+                      justifyContent:'space-around'}}>
         <Button title="send feedback" color='blue' onPress={() =>{
             const feedback = {title,description}
             storeCloudData(feedback)
           }} />
         <Button title="get cloud data" color='red' onPress={() => getCloudData()} />
-
+        </View>
       </View>
     </SafeAreaView>
   );

@@ -96,9 +96,11 @@ let debugView = ""
       if (showResult) {
         showView =
         <View>
-          <Text style={{color:"red"}}>The number of people is:{num}</Text>
-          <Text style={{color:"red"}}>The total amount of bill is:{amount}</Text>
-          <View style={{alignItems:'center',justifyContent:'center'}}>
+          <View style={{alignItems:'center',justifyContent:'center',padding:"3%"}}>
+            <Text style={{color:"red"}}>The number of people is:{num}</Text>
+            <Text style={{color:"red"}}>The total amount of bill is:{amount}</Text>
+          </View>
+          <View style={{alignItems:'center',justifyContent:'center',padding:"3%"}}>
             <Button
               color='red'
               title='Calculate Result'
